@@ -1,3 +1,5 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/deeeity/mercury-lib/master/src.lua"))()
+
 local Workspace = game:GetService("Workspace")
 local Tweenservice = game:GetService("TweenService")
 local Players = game:GetService("Players")
@@ -5,12 +7,9 @@ local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local Character = LocalPlayer.Character
 
-local player_stats = require '/player_stats.lua'
-
-print(player_stats.GetValuePerSecond('ClientMoney'))
+local Worlds = Workspace:WaitForChild('Worlds'):GetChildren()
 
 
---[[
 local gui = Library:create{
     Theme = Library.Themes.Serika
 }
@@ -27,7 +26,7 @@ tab:dropdown({
     Name = "Worlds",
     Description = "Teleport to any world.",
     StartingText = "World",
-    Items = Areas.Beach.Items:GetChildren(),
+    Items = Worlds,
         --[["Beach",
         "Desert",
         "Candy",
@@ -43,14 +42,14 @@ tab:dropdown({
         "Toy",
         "Circus",
         "Tech Entry",
-        "Tech Spawn",
+        "Tech Spawn",]]
 
     Callback = function(Clicked)
     	local goal = {}
-    	goal.Position = Clicked.Base.Position + Vector3.new(0, 5, 0)
+    	goal.Position = Clicked.Position + Vector3.new(0, 5, 0)
         Tweenservice:Create(Character.HumanoidRootPart, TweenInfo.new(14), goal):Play()
     end
-
+})
 tab:dropdown({
     Name = "yes",
     StartingText = "Number",
@@ -79,4 +78,4 @@ tab:color_picker({
     Callback = function(color)
         print(color)
     end,
-})]]
+})
