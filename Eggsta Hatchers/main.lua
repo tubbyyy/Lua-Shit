@@ -1,4 +1,5 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/deeeity/mercury-lib/master/src.lua"))()
+local Common_Functions = loadstring(game:HttpGet('https://raw.githubusercontent.com/tubbyyy/Lua-Shit/main/Eggsta%20Hatchers/common.lua'))()
 
 local Workspace = game:GetService("Workspace")
 local Tweenservice = game:GetService("TweenService")
@@ -47,7 +48,9 @@ tab:dropdown({
     Callback = function(Clicked)
     	local goal = {}
     	goal.Position = Clicked.Position + Vector3.new(0, 5, 0)
-        Tweenservice:Create(Character.HumanoidRootPart, TweenInfo.new(14), goal):Play()
+
+        local Time = Common_Functions:GetTime(Character.HumanoidRootPart, goal, 16)
+        Tweenservice:Create(Character.HumanoidRootPart, TweenInfo.new(Time), goal):Play()
     end
 })
 tab:dropdown({
