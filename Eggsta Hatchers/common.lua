@@ -6,4 +6,8 @@ function common:GetTime(Point1, Point2, Speed)
     return Time
 end
 
-return common
+return setmetatable(common, {
+	__index = function(_, i)
+		return rawget(common, i:lower())
+	end
+})
